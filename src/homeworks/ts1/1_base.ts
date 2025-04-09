@@ -7,8 +7,8 @@ export const addPlus = (string: string): string => `+${string}`;
 
 export const removeFirstZeros = (value: string): string => value.replace(/^(-)?0+(-?\d+.*)$/, '$1$2');
 
-export const getBeautifulNumber = (value: { toString: () => any }, separator = ' '): string =>
-  value?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+export const getBeautifulNumber = (value: number, separator = ' '): string =>
+  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 
 export const round = (value: number, accuracy = 2): number => {
   const d = 10 ** accuracy;
@@ -18,7 +18,7 @@ export const round = (value: number, accuracy = 2): number => {
 const transformRegexp =
   /(matrix\(-?\d+(\.\d+)?, -?\d+(\.\d+)?, -?\d+(\.\d+)?, -?\d+(\.\d+)?, )(-?\d+(\.\d+)?), (-?\d+(\.\d+)?)\)/;
 
-export const getTransformFromCss = (transformCssString: string): { x: number; y: number } => {
+export const getTransformFromCss = (transformCssString: string): Point => {
   const data = transformCssString.match(transformRegexp);
   if (!data) return { x: 0, y: 0 };
   return {
@@ -27,17 +27,27 @@ export const getTransformFromCss = (transformCssString: string): { x: number; y:
   };
 };
 
+type Point = {
+  x: number;
+  y: number;
+};
+
 export const getColorContrastValue = ([red, green, blue]: [number, number, number]) =>
   // http://www.w3.org/TR/AERT#color-contrast
   Math.round((red * 299 + green * 587 + blue * 114) / 1000);
 
-export const getContrastType = (contrastValue: number) => (contrastValue > 125 ? 'black' : 'white');
-
+export const getContrastType = (contrastValue: number): 'black' | 'white' => (contrastValue > 125 ? 'black' : 'white');
 export const shortColorRegExp = /^#[0-9a-f]{3}$/i;
 export const longColorRegExp = /^#[0-9a-f]{6}$/i;
 
+function throwColorError(color: string): never {
+  throw new Error(`invalid hex color: ${color}`);
+}
+
 export const checkColor = (color: string): void => {
-  if (!longColorRegExp.test(color) && !shortColorRegExp.test(color)) throw new Error(`invalid hex color: ${color}`);
+  if (!longColorRegExp.test(color) && !shortColorRegExp.test(color)) {
+    throwColorError(color);
+  }
 };
 
 export const hex2rgb = (color: string): [number, number, number] => {
