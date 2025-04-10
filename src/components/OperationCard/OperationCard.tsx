@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './OperationCard.module.css';
 
 export type OperationCardProps = {
@@ -8,7 +8,7 @@ export type OperationCardProps = {
   description: string;
 };
 
-const OperationCard: React.FC<OperationCardProps> = ({ amount, category, title, description }) => {
+const OperationCard: FC<OperationCardProps> = ({ amount, category, title, description }) => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
