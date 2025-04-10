@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import Modal from './Modal';
 
 export default {
@@ -10,6 +10,6 @@ export default {
   },
 };
 
-const Template = (args: React.ComponentProps<typeof Modal>) => <Modal {...args} />;
+const Template = (args: ComponentProps<typeof Modal>) => <Modal {...args} />;
 
 export const Default = Template.bind({});

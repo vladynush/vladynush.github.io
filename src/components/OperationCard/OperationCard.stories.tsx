@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import OperationCard from './OperationCard';
 
 export default {
@@ -12,6 +12,6 @@ export default {
   },
 };
 
-const Template = (args: React.ComponentProps<typeof OperationCard>) => <OperationCard {...args} />;
+const Template = (args: ComponentProps<typeof OperationCard>) => <OperationCard {...args} />;
 
 export const Default = Template.bind({});

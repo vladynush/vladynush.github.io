@@ -1,18 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { ThemeProvider } from '../context/ThemeContext';
+import { LanguageProvider } from '../context/LanguageContext';
+import Layout from '../components/Layout/Layout';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t } = useTranslation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>1. В рамках курса хочу овладеть компетенциями в фронтенд разработке</p>
-        <p>2. React</p>
-        <p>3. Частично знаком с jQuery и небольшой опыта в верстке </p>
-        <p>4. 4 года опыта backend на Java</p>
-      </header>
-    </div>
+    <LanguageProvider>
+      <ThemeProvider>
+        <Layout>
+          <h1>{t('title')}</h1>
+          <p>{t('point_1')}</p>
+          <p>{t('point_2')}</p>
+          <p>{t('point_3')}</p>
+          <p>{t('point_4')}</p>
+        </Layout>
+      </ThemeProvider>
+    </LanguageProvider>
   );
 }
 

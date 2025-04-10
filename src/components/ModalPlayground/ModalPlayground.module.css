@@ -1,0 +1,19 @@
+.wrapper {
+    padding: 16px;
+}
+
+.input {
+    padding: 8px;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.openButton {
+    padding: 8px 16px;
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

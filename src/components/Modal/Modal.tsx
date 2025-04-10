@@ -1,19 +1,22 @@
-import React from 'react';
-import './Modal.module.css';
+import React, { ReactNode } from 'react';
+import styles from './Modal.module.css';
 
 type ModalProps = {
   visible: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
+  onClose?: () => void;
 };
 
-const Modal: React.FC<ModalProps> = ({ visible, children }) => {
+const Modal = ({ visible, children, onClose }: ModalProps): JSX.Element | null => {
   if (!visible) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-window">
-        <button className="modal-close">×</button>
-        <div className="modal-content">{children}</div>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalWindow}>
+        <button className={styles.modalClose} onClick={onClose}>
+          ×
+        </button>
+        <div className={styles.modalContent}>{children}</div>
       </div>
     </div>
   );
