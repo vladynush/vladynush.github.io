@@ -1,25 +1,24 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styles from './OperationCard.module.css';
 
-export type OperationCardProps = {
-  amount: number;
-  category: string;
+type Props = {
   title: string;
+  category: string;
   description: string;
+  amount: number;
+  onClick?: () => void;
+  index?: number;
 };
 
-const OperationCard: FC<OperationCardProps> = ({ amount, category, title, description }) => {
+const OperationCard: React.FC<Props> = ({ title, category, description, amount, onClick, index }) => {
   return (
-    <div className={styles.card}>
-      <div className={styles.header}>
-        <span className={styles.amount}>₽ {amount.toFixed(2)}</span>
-        <span className={styles.category}>{category}</span>
+    <div className={styles.card} onClick={onClick} style={{ animationDelay: `${(index ?? 0) * 50}ms` }}>
+      <div className={styles.info}>
+        <h4 className={styles.title}>{title}</h4>
+        <div className={styles.category}>{category}</div>
+        <div className={styles.description}>{description}</div>
       </div>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.description}>
-        {description.slice(0, 60)}
-        {description.length > 60 && '...'}
-      </div>
+      <div className={styles.amount}>{amount > 0 ? `+${amount}` : amount} ₽</div>
     </div>
   );
 };

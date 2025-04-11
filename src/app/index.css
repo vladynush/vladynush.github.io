@@ -23,6 +23,7 @@ body[data-theme='light'] {
     --input-focus: #6366f1;
     --input-shadow: rgba(99, 102, 241, 0.2);
     --placeholder-color: #9ca3af;
+    --hover-bg: #f9fafb;
 }
 
 body[data-theme='dark'] {
@@ -39,4 +40,5 @@ body[data-theme='dark'] {
     --input-focus: #a5b4fc;
     --input-shadow: rgba(165, 180, 252, 0.3);
     --placeholder-color: #9ca3af;
+    --hover-bg: #1f1f1f;
 }

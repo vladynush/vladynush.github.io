@@ -1,26 +1,25 @@
 import React, { FC } from 'react';
 import styles from './OperationDetails.module.css';
 
-export type OperationDetailsProps = {
-  amount: number;
-  category: string;
+type Props = {
   title: string;
+  category: string;
+  amount: number;
   description: string;
   date: string;
+  variant?: 'card' | 'modal';
 };
 
-const OperationDetails: FC<OperationDetailsProps> = ({ amount, category, title, description, date }) => {
+const OperationDetails: FC<Props> = ({ title, category, amount, description, date, variant = 'card' }) => {
   return (
-    <div className={styles.card}>
-      <div className={styles.header}>
-        <div className={styles.amount}>₽ {amount.toFixed(2)}</div>
-        <div className={styles.category}>{category}</div>
-      </div>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.date}>Дата: {date}</div>
+    <div className={`${styles.details} ${styles[variant]}`}>
+      <h2 className={styles.title}>{title}</h2>
+      <div className={styles.category}>{category}</div>
+      <div className={styles.amount}>{amount > 0 ? `+${amount}` : amount} ₽</div>
       <div className={styles.description}>{description}</div>
-      <button className={styles.editButton} disabled>
-        Редактировать
+      <div className={styles.date}>📅 {date}</div>
+      <button className={styles.button} disabled>
+        ✏️ Редактировать
       </button>
     </div>
   );
