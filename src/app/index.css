@@ -1,3 +1,9 @@
+:root {
+    --tip-bg: rgba(30, 30, 30, 0.95);
+    --tip-color: #fff;
+    --tip-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -24,6 +30,10 @@ body[data-theme='light'] {
     --input-shadow: rgba(99, 102, 241, 0.2);
     --placeholder-color: #9ca3af;
     --hover-bg: #f9fafb;
+
+    --tip-bg: rgba(0, 0, 0, 0.85);
+    --tip-color: #fff;
+    --tip-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 body[data-theme='dark'] {
@@ -41,4 +51,8 @@ body[data-theme='dark'] {
     --input-shadow: rgba(165, 180, 252, 0.3);
     --placeholder-color: #9ca3af;
     --hover-bg: #1f1f1f;
+
+    --tip-bg: rgba(255, 255, 255, 0.1);
+    --tip-color: #fff;
+    --tip-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
