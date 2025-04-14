@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import Layout from './Layout';
 
 export default {
@@ -14,6 +14,6 @@ export default {
   },
 };
 
-const Template = (args: React.ComponentProps<typeof Layout>) => <Layout {...args} />;
+const Template = (args: ComponentProps<typeof Layout>) => <Layout {...args} />;
 
 export const Default = Template.bind({});

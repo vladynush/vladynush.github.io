@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import Header from '../Header/Header';
+import styles from './Layout.module.css';
 
 type LayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <main style={{ padding: '20px' }}>{children}</main>
+      <main className={styles.main}>{children}</main>
     </>
   );
 };

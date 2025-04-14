@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import OperationDetails from './OperationDetails';
 
 export default {
@@ -13,6 +13,6 @@ export default {
   },
 };
 
-const Template = (args: React.ComponentProps<typeof OperationDetails>) => <OperationDetails {...args} />;
+const Template = (args: ComponentProps<typeof OperationDetails>) => <OperationDetails {...args} />;
 
 export const Default = Template.bind({});
