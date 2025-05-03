@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import OperationCard from './OperationCard';
+import { OperationCard } from './OperationCard';
 
 export default {
   title: 'Finance/OperationCard',

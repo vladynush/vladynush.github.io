@@ -1,21 +1,20 @@
-import React, { FC } from 'react';
-import { Operation } from 'src/shared/types/Operation';
-import OperationCard from '../OperationCard/OperationCard';
+import React, { FC, useCallback, useMemo } from 'react';
 import styles from './OperationsList.module.css';
+import { Operation } from 'src/shared/types/Operation';
+import { OperationCard } from '../OperationCard/OperationCard';
 
-type OperationsListProps = {
+export type OperationsListProps = {
   operations: Operation[];
-  onSelect?: (op: Operation) => void;
+  onSelect: (op: Operation) => void;
 };
 
-const OperationsList: FC<OperationsListProps> = ({ operations, onSelect }) => {
-  return (
-    <div className={styles.list}>
-      {operations.map((op, i) => (
-        <OperationCard key={op.id} {...op} index={i} onClick={() => onSelect?.(op)} />
-      ))}
-    </div>
+export const OperationsList: FC<OperationsListProps> = ({ operations, onSelect }) => {
+  const handleSelect = useCallback((op: Operation) => onSelect(op), [onSelect]);
+
+  const cards = useMemo(
+    () => operations.map((op, i) => <OperationCard key={op.id} {...op} index={i} onClick={() => handleSelect(op)} />),
+    [operations, handleSelect]
   );
-};
 
-export default OperationsList;
+  return <div className={styles.list}>{cards}</div>;
+};
