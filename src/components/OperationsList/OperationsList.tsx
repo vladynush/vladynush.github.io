@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Operation } from '../../types/Operation';
+import { Operation } from 'src/shared/types/Operation';
 import OperationCard from '../OperationCard/OperationCard';
 import styles from './OperationsList.module.css';
 

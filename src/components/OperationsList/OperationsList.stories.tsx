@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import OperationsList from './OperationsList';
-import { Operation } from '../../types/Operation';
+import { Operation } from 'src/shared/types/Operation';
 import Modal from '../Modal/Modal';
 import OperationDetails from '../OperationDetails/OperationDetails';
 

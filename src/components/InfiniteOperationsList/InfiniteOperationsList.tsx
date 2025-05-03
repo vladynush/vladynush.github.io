@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Operation } from '../../types/Operation';
+import { Operation } from 'src/shared/types/Operation';
 import Modal from '../Modal/Modal';
 import OperationDetails from '../OperationDetails/OperationDetails';
 import { generateFakeOperation } from '../../utils/generateFakeOperation';

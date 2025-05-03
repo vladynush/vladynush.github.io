@@ -1,5 +1,5 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { Operation } from '../types/Operation';
+import { Operation } from 'src/shared/types/Operation';
 
 const DEFAULT_BUFFER = 3;
 

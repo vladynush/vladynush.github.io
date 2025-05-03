@@ -1,4 +1,4 @@
-import { Operation } from '../types/Operation';
+import { Operation } from 'src/shared/types/Operation';
 import { v4 as uuidv4 } from 'uuid';
 
 const categories = ['Продукты', 'Транспорт', 'Развлечения', 'Образование', 'Путешествия'];
