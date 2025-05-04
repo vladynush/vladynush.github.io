@@ -1,10 +1,7 @@
 .form {
     background-color: var(--bg-color);
     border-radius: 20px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-    padding: 32px;
-    max-width: 480px;
-    width: 100%;
+    width: 480px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;

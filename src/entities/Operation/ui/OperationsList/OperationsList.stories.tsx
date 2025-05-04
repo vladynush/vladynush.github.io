@@ -35,7 +35,7 @@ export const ClickToShowDetails = () => {
     <>
       <OperationsList operations={mockOperations} onSelect={(op) => setSelected(op)} />
 
-      <Modal visible={!!selected} onClose={() => setSelected(null)}>
+      <Modal isOpen={!!selected} onClose={() => setSelected(null)}>
         <OperationDetails {...selected} variant="modal" />
       </Modal>
     </>

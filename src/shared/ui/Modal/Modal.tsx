@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 
 export type ModalProps = {
-  visible: boolean;
+  isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };
 
-const ModalComponent: React.FC<ModalProps> = ({ visible, onClose, children }) => {
+const ModalComponent: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
 
   // Закрытие по Escape и блокировка прокрутки
   useEffect(() => {
-    if (!visible) return;
+    if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') handleClose();
     };
@@ -25,9 +25,9 @@ const ModalComponent: React.FC<ModalProps> = ({ visible, onClose, children }) =>
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [visible, handleClose]);
+  }, [isOpen, handleClose]);
 
-  if (!visible) return null;
+  if (!isOpen) return null;
 
   return ReactDOM.createPortal(
     <div className={styles.modalOverlay} onClick={handleClose}>

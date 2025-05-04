@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './routes/AppRoutes';
+import { AppRoutes } from './routes/AppRoutes';
 import { ThemeProvider } from 'src/app/providers/ThemeProvider';
 import { LanguageProvider } from 'src/app/providers/LanguageProvider';
 

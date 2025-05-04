@@ -38,7 +38,7 @@ const InfiniteOperationsListComponent: React.FC = () => {
         <div ref={observerRef} style={{ height: 1 }} />
       </div>
 
-      <Modal visible={!!selected} onClose={handleClose}>
+      <Modal isOpen={!!selected} onClose={handleClose}>
         {selected && <OperationDetails {...selected} />}
       </Modal>
     </>
