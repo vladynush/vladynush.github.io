@@ -14,19 +14,19 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    initApp(state) {
-      state.isInited = true;
-    },
-    login(state, action: PayloadAction<string>) {
+    login: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
       localStorage.setItem('token', action.payload);
     },
-    logout(state) {
+    logout: (state) => {
       state.token = null;
       localStorage.removeItem('token');
     },
-    syncToken(state, action: PayloadAction<string | null>) {
+    syncToken: (state, action: PayloadAction<string | null>) => {
       state.token = action.payload;
+    },
+    initApp: (state) => {
+      state.isInited = true;
     },
   },
 });
