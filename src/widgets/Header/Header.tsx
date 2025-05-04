@@ -4,8 +4,11 @@ import Logo from 'src/shared/ui/Logo/Logo';
 import ThemeSwitcher from 'src/widgets/ThemeSwitcher/ThemeSwitcher';
 import LanguageSwitcher from 'src/widgets/LanguageSwitcher/LanguageSwitcher';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/app/store/store';
 
 const Header: FC = () => {
+  const profile = useSelector((state: RootState) => state.profile);
   return (
     <header className={styles.header}>
       <Logo />
@@ -20,6 +23,7 @@ const Header: FC = () => {
       </nav>
 
       <div className={styles.controls}>
+        {profile && <span className={styles.username}>{profile.name}</span>}
         <ThemeSwitcher />
         <LanguageSwitcher />
       </div>

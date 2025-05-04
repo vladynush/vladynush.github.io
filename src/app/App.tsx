@@ -4,7 +4,7 @@ import { AppRoutes } from './routes/AppRoutes';
 import { ThemeProvider } from 'src/app/providers/ThemeProvider';
 import { LanguageProvider } from 'src/app/providers/LanguageProvider';
 import { useDispatch } from 'react-redux';
-import { syncToken } from 'src/entities/auth/model/authSlice';
+import { syncToken } from 'src/entities/Auth/model/authSlice';
 import ProfileInitializer from 'src/app/ProfileInitializer';
 
 const AppInitializer: FC = () => {

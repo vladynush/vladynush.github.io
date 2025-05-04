@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { LoginForm } from 'src/features/auth/ui/LoginForm';
-import { login } from 'src/entities/auth/model/authSlice';
+import { login } from 'src/entities/Auth/model/authSlice';
 import { nanoid } from '@reduxjs/toolkit';
 
 const LoginPage: React.FC = () => {

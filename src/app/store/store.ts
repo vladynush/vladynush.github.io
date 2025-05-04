@@ -1,15 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from 'src/entities/auth/model/authSlice';
-import profileReducer from 'src/entities/profile/model/profileSlice';
-// import cartReducer from 'src/entities/cart/model/cartSlice';
-// import operationsReducer from 'src/entities/product/model/operationsSlice';
+import authReducer from 'src/entities/Auth/model/authSlice';
+import profileReducer from 'src/entities/Profile/model/profileSlice';
+import operationsReducer from 'src/entities/Operation/model/operationsSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     profile: profileReducer,
-    // cart: cartReducer,
-    // operations: operationsReducer,
+    operations: operationsReducer,
   },
 });
 

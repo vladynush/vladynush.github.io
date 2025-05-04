@@ -1,21 +1,32 @@
-// src/pages/ProfilePage/index.tsx
-import React, { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/app/store/store';
 import Layout from 'src/shared/ui/Layout/Layout';
 import Input from 'src/shared/ui/Input/Input';
 import Button from 'src/shared/ui/Button/Button';
 import styles from './ProfilePage.module.css';
 
 export const ProfilePage: FC = () => {
+  const profile = useSelector((state: RootState) => state.profile);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (profile) {
+      setName(profile.name);
+      setEmail(profile.email);
+    }
+  }, [profile]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ name, email });
-    navigate('/profile');
+    console.log('Форма профиля не сохраняется — данные фейковые');
   };
+
+  if (!profile) {
+    return <Layout>Профиль не найден</Layout>;
+  }
 
   return (
     <Layout>

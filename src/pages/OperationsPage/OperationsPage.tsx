@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useOperations } from 'src/entities/Operation/model/useOperations';
 import Button from 'src/shared/ui/Button/Button';
-import { OperationsList } from 'src/entities/Operation/ui/OperationsList/OperationsList';
-import styles from './OperationsPage.module.css';
 import Layout from 'src/shared/ui/Layout/Layout';
+import styles from './OperationsPage.module.css';
+import { InfiniteOperationsList } from 'src/entities/Operation/ui/InfiniteOperationsList/InfiniteOperationsList';
 
 export const OperationsPage: FC = () => {
-  const { operations } = useOperations();
   const navigate = useNavigate();
   const location = useLocation();
 
   const openModal = (id?: string) =>
-    navigate(`/operations/${id ?? 'new'}`, { state: { backgroundLocation: location } });
+    navigate(`/operations/${id ?? 'new'}`, {
+      state: { backgroundLocation: location },
+    });
 
   return (
     <Layout>
@@ -23,7 +23,7 @@ export const OperationsPage: FC = () => {
             Добавить
           </Button>
         </div>
-        <OperationsList operations={operations} onSelect={(op) => openModal(op.id)} />
+        <InfiniteOperationsList />
       </div>
     </Layout>
   );
