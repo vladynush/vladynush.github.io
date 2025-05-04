@@ -22,6 +22,10 @@ export async function updateProfileFieldApi(field: 'email' | 'commandId', value:
   return otusApi.patch('/profile', { [field]: value });
 }
 
+export async function changePasswordApi(body: { password: string; newPassword: string }) {
+  return otusApi.post('/profile/change-password', body);
+}
+
 export async function registerUser(email: string, password: string): Promise<string> {
   const response = await otusApi.post('/signup', { email, password, 'vladynush-team': string });
   return response.data.token; // возвращает JWT
