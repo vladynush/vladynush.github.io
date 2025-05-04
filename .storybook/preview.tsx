@@ -1,9 +1,8 @@
 import type { Preview } from '@storybook/react';
-import React from 'react';
-import { ThemeProvider } from '../src/context/ThemeContext';
-import { LanguageProvider } from '../src/context/LanguageContext';
+import { ThemeProvider } from '../src/app/providers/ThemeProvider';
+import { LanguageProvider } from '../src/app/providers/LanguageProvider';
 import { I18nextProvider } from 'react-i18next';
-import i18n from '../src/i18n';
+import i18n from '../src/shared/lib/i18n';
 import '../src/app/index.css';
 
 const preview: Preview = {

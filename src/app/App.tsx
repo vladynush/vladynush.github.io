@@ -1,25 +1,17 @@
-import React from 'react';
-import './App.css';
-import { ThemeProvider } from '../context/ThemeContext';
-import { LanguageProvider } from '../context/LanguageContext';
-import Layout from '../components/Layout/Layout';
-import { useTranslation } from 'react-i18next';
+import React, { FC } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
+import { ThemeProvider } from 'src/app/providers/ThemeProvider';
+import { LanguageProvider } from 'src/app/providers/LanguageProvider';
 
-function App() {
-  const { t } = useTranslation();
-  return (
-    <LanguageProvider>
-      <ThemeProvider>
-        <Layout>
-          <h1>{t('title')}</h1>
-          <p>{t('point_1')}</p>
-          <p>{t('point_2')}</p>
-          <p>{t('point_3')}</p>
-          <p>{t('point_4')}</p>
-        </Layout>
-      </ThemeProvider>
-    </LanguageProvider>
-  );
-}
+const App: FC = () => (
+  <LanguageProvider>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </ThemeProvider>
+  </LanguageProvider>
+);
 
 export default App;
