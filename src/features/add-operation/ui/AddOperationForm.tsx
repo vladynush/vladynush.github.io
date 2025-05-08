@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { AddOperationFormProps } from '../model/types';
 import styles from './AddOperationForm.module.css';
 
-export const AddOperationForm: React.FC<AddOperationFormProps> = ({ formManager }) => {
+const AddOperationFormComponent: React.FC<AddOperationFormProps> = ({ formManager }) => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, submitCount } = formManager;
 
   const hasError = (field: keyof typeof values) => (touched[field] || submitCount > 0) && Boolean(errors[field]);
@@ -87,3 +87,5 @@ export const AddOperationForm: React.FC<AddOperationFormProps> = ({ formManager 
     </form>
   );
 };
+
+export const AddOperationForm = React.memo(AddOperationFormComponent);

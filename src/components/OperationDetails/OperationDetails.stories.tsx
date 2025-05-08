@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import OperationDetails from './OperationDetails';
+import { OperationDetails } from './OperationDetails';
 
 export default {
   title: 'Finance/OperationDetails',

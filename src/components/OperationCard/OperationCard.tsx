@@ -1,17 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import styles from './OperationCard.module.css';
 import { Tip } from '../Tip/Tip';
+import { Operation } from 'src/shared/types/Operation';
 
-type Props = {
-  title: string;
-  category: string;
-  description: string;
-  amount: number;
+export type OperationCardProps = Operation & {
   onClick?: () => void;
   index?: number;
 };
 
-const OperationCard: React.FC<Props> = ({ title, category, description, amount, onClick, index }) => {
+const OperationCardComponent: FC<OperationCardProps> = ({ title, category, description, amount, onClick, index }) => {
   const descRef = useRef<HTMLDivElement>(null);
   const [isTruncated, setIsTruncated] = useState(false);
 
@@ -44,4 +41,4 @@ const OperationCard: React.FC<Props> = ({ title, category, description, amount, 
   );
 };
 
-export default OperationCard;
+export const OperationCard = memo(OperationCardComponent);

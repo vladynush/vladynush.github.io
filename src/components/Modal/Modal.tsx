@@ -1,36 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 
-type ModalProps = {
+export type ModalProps = {
   visible: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({ visible, onClose, children }) => {
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', handleEsc);
-    return () => document.removeEventListener('keydown', handleEsc);
+const ModalComponent: React.FC<ModalProps> = ({ visible, onClose, children }) => {
+  const handleClose = useCallback(() => {
+    onClose();
   }, [onClose]);
 
+  // Закрытие по Escape и блокировка прокрутки
   useEffect(() => {
-    if (visible && closeButtonRef.current) {
-      closeButtonRef.current.focus();
-    }
-  }, [visible]);
+    if (!visible) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [visible, handleClose]);
 
   if (!visible) return null;
 
   return ReactDOM.createPortal(
-    <div className={styles.modalOverlay} onClick={onClose}>
+    <div className={styles.modalOverlay} onClick={handleClose}>
       <div className={styles.modalWindow} onClick={(e) => e.stopPropagation()}>
-        <button ref={closeButtonRef} className={styles.modalClose} onClick={onClose} aria-label="Close modal">
+        <button className={styles.modalClose} onClick={handleClose}>
           ×
         </button>
         <div className={styles.modalContent}>{children}</div>
@@ -40,4 +42,4 @@ const Modal: React.FC<ModalProps> = ({ visible, onClose, children }) => {
   );
 };
 
-export default Modal;
+export const Modal = React.memo(ModalComponent);
