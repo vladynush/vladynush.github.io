@@ -50,6 +50,7 @@
     opacity: 0.9;
     white-space: nowrap;
     overflow: hidden;
+    display: block;
     text-overflow: ellipsis;
     max-width: 100%;
 }
