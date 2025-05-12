@@ -1,18 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { AppRoutes } from './routes/AppRoutes';
+import { ThemeProvider } from 'src/app/providers/ThemeProvider';
+import { LanguageProvider } from 'src/app/providers/LanguageProvider';
+import { useDispatch } from 'react-redux';
+import { syncToken } from 'src/entities/Auth/model/authSlice';
+import ProfileInitializer from 'src/app/ProfileInitializer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Текст писать тут
-        </p>
-      </header>
-    </div>
-  );
-}
+const AppInitializer: FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const listener = (e: StorageEvent) => {
+      if (e.key === 'token') {
+        dispatch(syncToken(e.newValue));
+      }
+    };
+    window.addEventListener('storage', listener);
+    return () => window.removeEventListener('storage', listener);
+  }, [dispatch]);
+
+  return null;
+};
+
+const App: FC = () => (
+  <LanguageProvider>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppRoutes />
+        <AppInitializer />
+        <ProfileInitializer />
+      </BrowserRouter>
+    </ThemeProvider>
+  </LanguageProvider>
+);
 
 export default App;
