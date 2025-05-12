@@ -66,9 +66,16 @@
     "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.7.0",
+    "antd": "^5.5.1",
     "clsx": "^1.2.1",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^15.4.1"
+    "react-hook-form": "^7.56.2",
+    "react-i18next": "^15.4.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.5.3",
+    "yup": "^1.6.1"
   }
 }
