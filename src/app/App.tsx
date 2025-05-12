@@ -1,25 +1,38 @@
-import React from 'react';
-import './App.css';
-import { ThemeProvider } from '../context/ThemeContext';
-import { LanguageProvider } from '../context/LanguageContext';
-import Layout from '../components/Layout/Layout';
-import { useTranslation } from 'react-i18next';
+import React, { FC, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { AppRoutes } from './routes/AppRoutes';
+import { ThemeProvider } from 'src/app/providers/ThemeProvider';
+import { LanguageProvider } from 'src/app/providers/LanguageProvider';
+import { useDispatch } from 'react-redux';
+import { syncToken } from 'src/entities/Auth/model/authSlice';
+import ProfileInitializer from 'src/app/ProfileInitializer';
 
-function App() {
-  const { t } = useTranslation();
-  return (
-    <LanguageProvider>
-      <ThemeProvider>
-        <Layout>
-          <h1>{t('title')}</h1>
-          <p>{t('point_1')}</p>
-          <p>{t('point_2')}</p>
-          <p>{t('point_3')}</p>
-          <p>{t('point_4')}</p>
-        </Layout>
-      </ThemeProvider>
-    </LanguageProvider>
-  );
-}
+const AppInitializer: FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const listener = (e: StorageEvent) => {
+      if (e.key === 'token') {
+        dispatch(syncToken(e.newValue));
+      }
+    };
+    window.addEventListener('storage', listener);
+    return () => window.removeEventListener('storage', listener);
+  }, [dispatch]);
+
+  return null;
+};
+
+const App: FC = () => (
+  <LanguageProvider>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppRoutes />
+        <AppInitializer />
+        <ProfileInitializer />
+      </BrowserRouter>
+    </ThemeProvider>
+  </LanguageProvider>
+);
 
 export default App;
