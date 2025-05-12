@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Operation } from 'src/shared/types/Operation';
 

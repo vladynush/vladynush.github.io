@@ -91,7 +91,7 @@ export const Tip: FC<TipProps> = ({
   };
   const handleMoveRef = useRef<(e: MouseEvent) => void>();
 
-  const onMouseEnter = (e: React.MouseEvent) => {
+  const onMouseEnter = () => {
     clearTimeout(timeoutRef.current);
     dispatch({ type: TipType.mount });
 
