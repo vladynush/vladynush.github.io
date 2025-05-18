@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { string } from 'yup';
+import { Operation } from 'src/shared/types/Operation';
 
 export const otusApi = axios.create({
   baseURL: 'http://19429ba06ff2.vps.myjino.ru/api',
@@ -34,4 +35,28 @@ export async function registerUser(email: string, password: string): Promise<str
 export async function loginUser(email: string, password: string): Promise<string> {
   const response = await otusApi.post('/signin', { email, password });
   return response.data.token;
+}
+
+export type Category = {
+  id: string;
+  name: string;
+  photo?: string;
+  commandId: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export async function getCategories(): Promise<Category[]> {
+  const res = await otusApi.get('/categories');
+  return res.data.data; // ⚠️ именно data.data
+}
+
+export async function createOperation(operation: Omit<Operation, 'id' | 'category'>): Promise<Operation> {
+  const res = await otusApi.post('/operations', operation);
+  return res.data;
+}
+
+export async function updateOperation(id: string, operation: Omit<Operation, 'id' | 'category'>): Promise<Operation> {
+  const res = await otusApi.put(`/operations/${id}`, operation);
+  return res.data;
 }

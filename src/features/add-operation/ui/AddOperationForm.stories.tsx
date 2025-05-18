@@ -15,7 +15,7 @@ type Story = StoryObj<typeof AddOperationForm>;
 export const Default: Story = {
   render: () => {
     const initialValues: OperationFormValues = {
-      title: '',
+      name: '',
       amount: 0,
       category: '',
       date: '',
@@ -26,7 +26,7 @@ export const Default: Story = {
         initialValues={initialValues}
         validate={(values) => {
           const errors: Partial<Record<keyof OperationFormValues, string>> = {};
-          if (!values.title) errors.title = 'Название обязательно';
+          if (!values.name) errors.name = 'Название обязательно';
           if (values.amount === 0) errors.amount = 'Сумма не должна быть нулём';
           if (!values.category) errors.category = 'Укажите категорию';
           if (!values.date) errors.date = 'Укажите дату';
@@ -37,7 +37,7 @@ export const Default: Story = {
           resetForm();
         }}
       >
-        {(fm) => <AddOperationForm formManager={fm} />}
+        {(fm) => <AddOperationForm formManager={fm} categories={[]} />}
       </Formik>
     );
   },
