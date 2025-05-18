@@ -1,6 +1,5 @@
-// src/features/add-operation/ui/OperationFormModal.tsx
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Formik } from 'formik';
 import { Modal } from 'src/shared/ui/Modal/Modal';
 import { AddOperationForm } from './AddOperationForm';
@@ -9,6 +8,8 @@ import { OperationFormValues } from 'src/features/add-operation/model/types';
 
 export const OperationFormModal: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { id } = useParams<{ id?: string }>();
   const isNew = !id || id === 'new';
 
@@ -35,7 +36,12 @@ export const OperationFormModal: React.FC = () => {
     try {
       const { category, ...rest } = values;
       const operationType = rest.amount > 0 ? 'Profit' : 'Cost';
-      const payload = { ...rest, categoryId: category, type: operationType };
+
+      const payload = {
+        ...rest,
+        categoryId: category,
+        type: operationType,
+      };
 
       if (isNew) {
         await createOperation(payload);
@@ -43,13 +49,18 @@ export const OperationFormModal: React.FC = () => {
         await updateOperation(id, payload);
       }
 
-      navigate(-1);
+      const cameFromOperations = location.state?.fromOperationsPage;
+
+      if (cameFromOperations) {
+        navigate('/operations', { replace: true });
+        window.location.reload();
+      } else {
+        navigate(-1);
+      }
     } catch (error: any) {
       console.error('Ошибка при сохранении:', error);
-
       const apiError = error?.response?.data?.errors?.[0]?.message ?? 'Неизвестная ошибка при сохранении';
       alert(apiError);
-
       helpers.setSubmitting(false);
     }
   };
@@ -60,20 +71,10 @@ export const OperationFormModal: React.FC = () => {
         initialValues={initialValues}
         validate={(values) => {
           const errors: Partial<Record<keyof OperationFormValues, string>> = {};
-
-          if (!values.name) {
-            errors.name = 'Название обязательно';
-          }
-          if (!values.amount && values.amount !== 0) {
-            errors.amount = 'Сумма обязательна';
-          }
-          if (!values.category) {
-            errors.category = 'Категория обязательна';
-          }
-          if (!values.date) {
-            errors.date = 'Дата обязательна';
-          }
-
+          if (!values.name) errors.name = 'Название обязательно';
+          if (!values.amount && values.amount !== 0) errors.amount = 'Сумма обязательна';
+          if (!values.category) errors.category = 'Категория обязательна';
+          if (!values.date) errors.date = 'Дата обязательна';
           return errors;
         }}
         onSubmit={handleSubmit}

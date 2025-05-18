@@ -60,3 +60,8 @@ export async function updateOperation(id: string, operation: Omit<Operation, 'id
   const res = await otusApi.put(`/operations/${id}`, operation);
   return res.data;
 }
+
+export async function getOperations(): Promise<Operation[]> {
+  const res = await otusApi.get('/operations');
+  return res.data.data; // или просто res.data — в зависимости от API
+}
