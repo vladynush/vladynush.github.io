@@ -51,10 +51,6 @@ const LoginPage: React.FC = () => {
       <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={handleLogin}
-        // validationSchema={Yup.object({
-        //   email: Yup.string().email('Некорректный email').required('Обязательное поле'),
-        //   password: Yup.string().min(4, 'Минимум 4 символа').required('Обязательное поле'),
-        // })}
       >
         {(formManager) => <LoginForm formManager={formManager} />}
       </Formik>

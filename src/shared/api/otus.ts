@@ -28,7 +28,7 @@ export async function changePasswordApi(body: { password: string; newPassword: s
 
 export async function registerUser(email: string, password: string): Promise<string> {
   const response = await otusApi.post('/signup', { email, password, commandId: 'vladynush-team' as string });
-  return response.data.token; // возвращает JWT
+  return response.data.token;
 }
 
 export async function loginUser(email: string, password: string): Promise<string> {
@@ -47,7 +47,7 @@ export type Category = {
 
 export async function getCategories(): Promise<Category[]> {
   const res = await otusApi.get('/categories');
-  return res.data.data; // ⚠️ именно data.data
+  return res.data.data;
 }
 
 export async function createOperation(operation: Omit<Operation, 'id' | 'category'>): Promise<Operation> {
@@ -62,5 +62,5 @@ export async function updateOperation(id: string, operation: Omit<Operation, 'id
 
 export async function getOperations(): Promise<Operation[]> {
   const res = await otusApi.get('/operations');
-  return res.data.data; // или просто res.data — в зависимости от API
+  return res.data.data;
 }

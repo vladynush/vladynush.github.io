@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/named
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { registerThunk } from './authThunks'; // <--- добавь этот импорт
+import { registerThunk } from './authThunks';
 
 type AuthState = {
   token: string | null;
@@ -34,7 +34,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(registerThunk.fulfilled, (state, action) => {
       state.token = action.payload;
-      localStorage.setItem('token', action.payload); // <--- добавим сохранение
+      localStorage.setItem('token', action.payload);
     });
   },
 });
