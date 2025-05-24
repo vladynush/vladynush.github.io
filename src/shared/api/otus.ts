@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { string } from 'yup';
 import { Operation } from 'src/shared/types/Operation';
 
 export const otusApi = axios.create({
@@ -28,7 +27,7 @@ export async function changePasswordApi(body: { password: string; newPassword: s
 }
 
 export async function registerUser(email: string, password: string): Promise<string> {
-  const response = await otusApi.post('/signup', { email, password, 'vladynush-team': string });
+  const response = await otusApi.post('/signup', { email, password, commandId: 'vladynush-team' as string });
   return response.data.token; // возвращает JWT
 }
 

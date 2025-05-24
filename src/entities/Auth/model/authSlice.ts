@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { registerThunk } from './authThunks'; // <--- добавь этот импорт
 
 type AuthState = {
   token: string | null;
@@ -28,6 +29,12 @@ const authSlice = createSlice({
     initApp: (state) => {
       state.isInited = true;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(registerThunk.fulfilled, (state, action) => {
+      state.token = action.payload;
+      localStorage.setItem('token', action.payload); // <--- добавим сохранение
+    });
   },
 });
 
