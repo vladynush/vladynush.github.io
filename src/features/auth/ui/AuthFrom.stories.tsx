@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import { LoginForm } from './LoginForm';
 import { RegisterForm } from './RegisterForm';
 import { LoginFormValues, RegisterFormValues } from '../model/types';
+import { validateLoginForm, validateRegisterForm } from 'src/features/auth/model/validate';
 
 const meta: Meta = {
   title: 'Features/AuthForms',
@@ -24,20 +25,7 @@ export const Login: LoginStory = {
     return (
       <Formik<LoginFormValues>
         initialValues={initialValues}
-        validate={(values) => {
-          const errors: Partial<Record<keyof LoginFormValues, string>> = {};
-          if (!values.email) {
-            errors.email = 'Email обязателен';
-          } else if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(values.email)) {
-            errors.email = 'Неверный формат email';
-          }
-          if (!values.password) {
-            errors.password = 'Пароль обязателен';
-          } else if (values.password.length < 6) {
-            errors.password = 'Минимум 6 символов';
-          }
-          return errors;
-        }}
+        validate={validateLoginForm}
         onSubmit={(values, { resetForm }) => {
           console.log('Login form submitted:', values);
           resetForm();
@@ -59,25 +47,7 @@ export const Register: RegisterStory = {
     return (
       <Formik<RegisterFormValues>
         initialValues={initialValues}
-        validate={(values) => {
-          const errors: Partial<Record<keyof RegisterFormValues, string>> = {};
-          if (!values.email) {
-            errors.email = 'Email обязателен';
-          } else if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(values.email)) {
-            errors.email = 'Неверный формат email';
-          }
-          if (!values.password) {
-            errors.password = 'Пароль обязателен';
-          } else if (values.password.length < 6) {
-            errors.password = 'Минимум 6 символов';
-          }
-          if (!values.confirmPassword) {
-            errors.confirmPassword = 'Подтвердите пароль';
-          } else if (values.confirmPassword !== values.password) {
-            errors.confirmPassword = 'Пароли не совпадают';
-          }
-          return errors;
-        }}
+        validate={validateRegisterForm}
         onSubmit={(values, { resetForm }) => {
           console.log('Register form submitted:', values);
           resetForm();
